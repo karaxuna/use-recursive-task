@@ -21,7 +21,7 @@ const getFreeItemStartingFrom = (items, startFrom) => {
     }
 }
 
-const createParallelIterator = (iterators) => {
+export const createParallelIterator = (iterators) => {
     const queue = []
     const results = []
     let watcher = null

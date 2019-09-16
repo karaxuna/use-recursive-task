@@ -1,3 +1,14 @@
 {
-    "name": "use-recursive-task"
+    "name": "use-recursive-task",
+    "main": "./dist/lib/index.js",
+    "scripts": {
+        "build-lib": "webpack -p --config=./webpack.config.lib.js",
+        "build-demo": "webpack -p --config=./webpack.config.demo.js",
+        "build": "npm run build-lib & npm run build-demo"
+    },
+    "devDependencies": {
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^4.40.2",
+        "webpack-cli": "^3.3.8"
+    }
 }
