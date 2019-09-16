@@ -79,7 +79,7 @@ const generator = exec(
     }
 })
 
-(async () => {
+async function asd() {
     while (true) {
         const res = await generator.next()
         console.log(res)
@@ -92,4 +92,6 @@ const generator = exec(
             res.value.retry()
         }
     }
-})()
+}
+
+asd()
