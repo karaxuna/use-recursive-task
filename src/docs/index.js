@@ -1,4 +1,4 @@
-import { exec } from '../lib'
+import { exec, call } from '../lib'
 
 const test = (result) => {
     return new Promise((resolve, reject) => {
@@ -14,70 +14,28 @@ const test = (result) => {
 }
 
 const generator = exec(
-    /*{
-        fn: function* () {
-            const data = yield {
-                fn: test,
-                args: [3]
-            }
-
-            console.log('data:', data)
-        }
-    }
-    [{
-        fn: function* () {
-            yield {
-                fn: test,
-                args: [3]
-            }
-        }
-    }, {
-        fn: function* () {
-            yield {
-                fn: test,
-                args: [4]
-            }
-        }
-    }]*/{
-    fn: function* () {
+    call(function* () {
         let data;
 
         console.log('0. data:', data)
 
-        data = yield {
-            fn: test,
-            args: [1]
-        }
+        data = yield call(test, [1])
 
         console.log('1. data:', data)
 
-        data = yield {
-            fn: test,
-            args: [2]
-        }
+        data = yield call(test, [2])
 
         console.log('2. data:', data)
 
-        data = yield [{
-            fn: function* () {
-                return yield {
-                    fn: test,
-                    args: [3]
-                }
-            }
-        }, {
-            fn: function* () {
-                return yield {
-                    fn: test,
-                    args: [4]
-                }
-            }
-        }]
+        data = yield [
+            data = yield call(test, [3]),
+            data = yield call(test, [4])
+        ]
 
         console.log('3, 4. data:', data)
         return 5
-    }
-})
+    })  
+)
 
 async function asd() {
     while (true) {
